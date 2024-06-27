@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\UserBioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,11 +24,16 @@ Route::get('login/{provider}', [AuthController::class, 'redirectToProvider']);
 Route::get('login/{provider}/callback', [AuthController::class, 'handleProviderCallback']);
 
 Route::middleware('auth:api')->group(function () {
-    Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api');
-    Route::post('refresh', [AuthController::class, 'refresh'])->middleware('auth:api');
-    Route::get('me', [AuthController::class, 'me'])->middleware('auth:api');
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('refresh', [AuthController::class, 'refresh']);
+    Route::get('me', [AuthController::class, 'me']);
 
     // Contact
     Route::post('contacts', [ContactController::class, 'addContact']);
     Route::get('contacts', [ContactController::class, 'getContacts']);
+
+    // User Bio
+    Route::post('user-bio', [UserBioController::class, 'store']);
+    Route::get('user-bio', [UserBioController::class, 'getUserBio']);
+    Route::put('user-bio', [UserBioController::class, 'update']);
 });

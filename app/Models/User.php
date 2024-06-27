@@ -39,6 +39,11 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
+    public function userBio()
+    {
+        return $this->hasOne(UserBio::class);
+    }
+
     public function contacts()
     {
         return $this->hasMany(Contact::class);
