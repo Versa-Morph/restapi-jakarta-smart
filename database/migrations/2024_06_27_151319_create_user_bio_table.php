@@ -16,16 +16,17 @@ class CreateUserBioTable extends Migration
         Schema::create('user_bio', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('nik');
+            $table->string('nik')->nullable();
             $table->string('profile_pict_path')->nullable();
-            $table->string('full_name');
-            $table->string('nickname');
-            $table->string('city');
-            $table->string('address');
-            $table->integer('age');
-            $table->string('blood_type');
-            $table->integer('height');
-            $table->integer('weight');
+            $table->string('full_name')->nullable();
+            $table->string('nickname')->nullable();
+            $table->string('city')->nullable();
+            $table->string('address')->nullable();
+            $table->integer('age')->nullable();
+            $table->string('blood_type')->nullable();
+            $table->integer('height')->nullable();
+            $table->integer('weight')->nullable();
+            $table->string('phone_number')->nullable();
             $table->timestamps();
 
             // Foreign key constraint

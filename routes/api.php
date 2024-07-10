@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\UserBioController;
+use App\Http\Controllers\UserContactController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,12 +29,13 @@ Route::middleware('auth:api')->group(function () {
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::get('me', [AuthController::class, 'me']);
 
-    // Contact
-    Route::post('contacts', [ContactController::class, 'addContact']);
-    Route::get('contacts', [ContactController::class, 'getContacts']);
-
     // User Bio
-    Route::post('user-bio', [UserBioController::class, 'store']);
+    Route::post('user-bio', [UserBioController::class, 'upsertUserBio']);
     Route::get('user-bio', [UserBioController::class, 'getUserBio']);
-    Route::put('user-bio', [UserBioController::class, 'update']);
+
+    // User Contacts
+    Route::get('user-contacts', [UserContactController::class, 'getUserContact']);
+    Route::post('user-contacts', [UserContactController::class, 'store']);
+    Route::put('user-contacts/{id}', [UserContactController::class, 'update']);
+    Route::delete('user-contacts/{id}', [UserContactController::class, 'destroy']);
 });

@@ -14,5 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('login'));
 });
+
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+
+Route::get('/overview', function () {
+    $data['page_title'] = 'overview';
+    return view('overview.index', $data);
+})->name('overview');
+

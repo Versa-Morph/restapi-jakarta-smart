@@ -12,7 +12,7 @@ class UserBio extends Model
     protected $table = 'user_bio';
 
     protected $fillable = [
-        'user_id', 'nik', 'profile_pict_path', 'full_name', 'nickname', 'city', 'address', 'age', 'blood_type', 'height', 'weight',
+        'user_id', 'nik', 'profile_pict_path', 'full_name', 'nickname', 'city', 'address', 'age', 'blood_type', 'height', 'weight','phone_number',
     ];
 
     public function user()
