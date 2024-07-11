@@ -18,9 +18,10 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth:web')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/overview', function () {
+        $data['page_title'] = 'overview';
+        return view('overview.index', $data);
+    })->name('overview');
 });
 
 

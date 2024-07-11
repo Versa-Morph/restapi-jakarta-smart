@@ -24,7 +24,7 @@
 
     <!-- Navbar Search Start -->
     <div class="navbar--search d-none">
-        <form action="search-results.html">
+        <form action="#!">
             <input type="search" name="search" class="form-control" placeholder="Search Something..." required>
             <button class="btn-link"><i class="fa fa-search"></i></button>
         </form>
@@ -32,14 +32,14 @@
     <!-- Navbar Search End -->
 
     <div class="mx-4 d-none d-md-block">
-        <h3 class="m-0 p-0 text-dark font-weight-bold">Hello Andika! 👋</h3>
+        <h3 class="m-0 p-0 text-dark font-weight-bold">Hello <span class="text-capitalize">{{ Auth::user()->username }}</span>! 👋</h3>
         <p class="m-0 p-0">Welcome back, we miss your coming</p>
     </div>
 
     <div class="navbar--nav ml-auto">
         <ul class="nav">
             <li class="nav-item">
-                <a href="mailbox_inbox.html" class="nav-link px-3">
+                <a href="#!" class="nav-link px-3">
                     <i class="far fa-envelope" style="font-size: 25px; color:#2C2828;"></i>
                 </a>
             </li>
@@ -56,17 +56,17 @@
             <li class="nav-item dropdown nav--user online">
                 <a href="#" class="nav-link" data-toggle="dropdown">
                     <img src="assets/img/avatars/01_80x80.png" alt="" class="rounded-circle">
-                    <span>Henry Foster</span>
+                    <span>{{ Auth::user()->username }}</span>
                     <i class="fa fa-angle-down"></i>
                 </a>
 
                 <ul class="dropdown-menu">
-                    <li><a href="profile.html"><i class="far fa-user"></i>Profile</a></li>
-                    <li><a href="mailbox_inbox.html"><i class="far fa-envelope"></i>Inbox</a></li>
+                    <li><a href="#!"><i class="far fa-user"></i>Profile</a></li>
+                    <li><a href="#!"><i class="far fa-envelope"></i>Inbox</a></li>
                     <li><a href="#"><i class="fa fa-cog"></i>Settings</a></li>
                     <li class="dropdown-divider"></li>
-                    <li><a href="lock-screen.html"><i class="fa fa-lock"></i>Lock Screen</a></li>
-                    <li><a href="#"><i class="fa fa-power-off"></i>Logout</a></li>
+                    <li><a href="#!"><i class="fa fa-lock"></i>Lock Screen</a></li>
+                    <li><a href="#!" onclick="event.preventDefault(); confirmLogout()"><i class="fa fa-power-off"></i>Logout</a> <form id="logout-form" action="{{ route('logout') }}" method="post" style="display: none;">@csrf</form></li>
                 </ul>
             </li>
             <!-- Nav User End -->

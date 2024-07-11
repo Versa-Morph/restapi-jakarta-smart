@@ -11,7 +11,7 @@
     <meta name="keywords" content="">
 
     <!-- ==== Favicon ==== -->
-    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="icon" href="{{ asset('assets/img/logo-title.png') }}" type="image/png">
 
     <!-- ==== Google Font ==== -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%7CMontserrat:400,500">

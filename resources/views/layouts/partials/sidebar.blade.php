@@ -9,30 +9,33 @@
         </div>
 
         <div class="profile--name">
-            <a href="profile.html" class="btn-link">Andika</a>
+            <a href="{{ route('overview') }}" class="btn-link">{{ Auth::user()->username }}</a>
         </div>
 
         <div class="profile--nav">
             <ul class="nav">
                 <li class="nav-item">
-                    <a href="profile.html" class="nav-link" title="User Profile">
+                    <a href="#!" class="nav-link" title="User Profile">
                         <i class="fa fa-user"></i>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="lock-screen.html" class="nav-link" title="Lock Screen">
+                    <a href="#!" class="nav-link" title="Lock Screen">
                         <i class="fa fa-lock"></i>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="mailbox_inbox.html" class="nav-link" title="Messages">
+                    <a href="#!" class="nav-link" title="Messages">
                         <i class="fa fa-envelope"></i>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link" title="Logout">
+                    <a href="#!" class="nav-link" title="Logout" onclick="event.preventDefault(); confirmLogout()">
                         <i class="fa fa-sign-out-alt"></i>
                     </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="post" style="display: none;">
+                        @csrf
+                    </form>
                 </li>
             </ul>
         </div>
@@ -40,7 +43,8 @@
     <!-- Sidebar Profile End -->
 
     <!-- Sidebar Navigation Start -->
-    <div class="sidebar--nav d-none">
+    @if(Auth::user()->role == 'admin')
+    <div class="sidebar--nav">
         <ul>
             <li>
                 <ul>
@@ -87,6 +91,7 @@
             </li>
         </ul>
     </div>
+    @endif
     <!-- Sidebar Navigation End -->
 </aside>
 <!-- Sidebar End -->

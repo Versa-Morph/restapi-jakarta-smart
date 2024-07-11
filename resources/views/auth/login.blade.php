@@ -12,11 +12,11 @@
         <title>Login - Smart Jakarta</title>
 
         <!-- Favicons-->
-        <link rel="shortcut icon" href="{{ asset('assets/img/rki_icon.png') }}" type="image/x-icon" />
-        <link rel="apple-touch-icon" type="image/x-icon" href="{{ asset('assets/img/rki_icon.png') }}" />
-        <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="{{ asset('assets/img/rki_icon.png') }}" />
-        <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="{{ asset('assets/img/rki_icon.png') }}" />
-        <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="{{ asset('assets/img/rki_icon.png') }}" />
+        <link rel="shortcut icon" href="{{ asset('assets/img/logo-title.png') }}" type="image/x-icon" />
+        <link rel="apple-touch-icon" type="image/x-icon" href="{{ asset('assets/img/logo-title.png') }}" />
+        <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="{{ asset('assets/img/logo-title.png') }}" />
+        <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="{{ asset('assets/img/logo-title.png') }}" />
+        <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="{{ asset('assets/img/logo-title.png') }}" />
 
         <!-- GOOGLE WEB FONT -->
         <link href="https://fonts.googleapis.com/css?family=Caveat|Poppins:300,400,500,600,700&display=swap" rel="stylesheet" />
@@ -59,14 +59,14 @@
                             <div class="form-group formlogin mt-3">
                                 <div class="input-icon">
                                     <i class="fas fa-user"></i>
-                                    <input type="text" name="username" id="username" class="style-form-input" required="" maxlength="20" placeholder="Input Your Username or Email..." title="maximum 20 characters" autofocus>
+                                    <input type="text" name="login" id="login" class="style-form-input" required="" maxlength="20" placeholder="Username or Email" title="maximum 20 characters" autofocus>
                                 </div>
                             </div>
 
                             <div class="form-group formlogin mt-3">
                                 <div class="input-icon">
                                     <i class="fas fa-lock"></i>
-                                    <input type="password" name="password" id="password" class="style-form-input" required="" autocomplete="on" title="maximum 10 characters" maxlength="10" placeholder="Input Your Password...">
+                                    <input type="password" name="password" id="password" class="style-form-input" required="" autocomplete="on" title="maximum 10 characters" maxlength="10" placeholder="Password">
                                 </div>
                             </div>
 
