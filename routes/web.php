@@ -17,12 +17,11 @@ Route::get('/', function () {
     return redirect(route('login'));
 });
 
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
 
-Route::get('/overview', function () {
-    $data['page_title'] = 'overview';
-    return view('overview.index', $data);
-})->name('overview');
 
+require __DIR__.'/auth.php';

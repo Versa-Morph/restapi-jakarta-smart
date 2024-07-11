@@ -7,7 +7,7 @@
     <!-- Main Content Start -->
     <section class="main--content">
         <div class="row gutter-20">
-            <div class="col-md-3">
+            <div class="col-md-3 mb-3">
                 <div class="card-custom">
                     <div class="icon-circle" style="background-color: #EFEAFA;">
                         <img src="{{ asset('assets/img/icon/users.png') }}"  alt="">
@@ -16,7 +16,7 @@
                     <div class="card-number mb-2">145</div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 mb-3">
                 <div class="card-custom">
                     <div class="icon-circle" style="background-color: #CBF2FF;">
                         <img src="{{ asset('assets/img/icon/users.png') }}"  alt="">
@@ -25,7 +25,7 @@
                     <div class="card-number mb-2">6</div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 mb-3">
                 <div class="card-custom">
                     <div class="icon-circle" style="background-color: #E5EDE6;">
                         <img src="{{ asset('assets/img/icon/users.png') }}"  alt="">
@@ -34,7 +34,7 @@
                     <div class="card-number mb-2">117</div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 mb-3">
                 <div class="card-custom">
                     <div class="icon-circle" style="background-color: #FFEDE2;">
                         <img src="{{ asset('assets/img/icon/users.png') }}"  alt="">

@@ -6493,7 +6493,7 @@ li.list-group-item:first-child {
 
 .profile--name a:hover,
 .profile--name a:focus {
-    color: #fff;
+    color: #000;
 }
 
 .profile--nav {
@@ -6506,7 +6506,7 @@ li.list-group-item:first-child {
 }
 
 .profile--nav .nav-link:hover {
-    color: #fff;
+    color: #000;
 }
 
 /* 10.2. SIDEBAR NAV */

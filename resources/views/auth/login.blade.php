@@ -3,14 +3,13 @@
     <head>
         <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
         <meta charset="utf-8" />
-        <meta name="description" content="Rumah Kesejahteraan Indonesia" />
-        <meta name="author" content="RKIAPP" />
+        <meta name="description" content="Smart Jakarta Application" />
+        <meta name="author" content="SartJKT Dev" />
         <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="keywords" content="RKI , RKIAPP, Rumah Kesejahteraan Indonesia, Koperasi, Koperasi Indonesia">
-        <meta name="author" content="Dev RKI">
-        <title>Dahsboard - RKI</title>
+        <meta name="keywords" content="Smart , SMARTJKT, Smart Jakarta, 2024">
+        <title>Login - Smart Jakarta</title>
 
         <!-- Favicons-->
         <link rel="shortcut icon" href="{{ asset('assets/img/rki_icon.png') }}" type="image/x-icon" />
@@ -46,8 +45,8 @@
                         <img class="mb-5" width="80%" src="{{ asset('assets/img/logo-smartJKT.png') }}" alt="Company Logo">
                         <p class="description">Jakarta <span class="color-smartj">Smart</span> is a location-based mobile <span class="color-smartj">application</span> designed to <span class="color-smartj">improve</span> the <span class="color-smartj">quality</span> of life for Jakartans by <span class="color-smartj">providing</span> a range of essential <span class="color-smartj">services</span> that can be accessed <span class="color-smartj">easily</span> and <span class="color-smartj">quickly</span>. The app offers <span class="color-smartj">comprehensive solutions</span> for a wide range of <span class="color-smartj">daily needs</span> and <span class="color-smartj">emergency situations</span>, which makes it a very useful tool for citizens of a <span class="color-smartj">dense</span> and <span class="color-smartj">dynamic</span> city like Jakarta.</p>
                     </div>
-                    <div class="col-0 col-md-2"></div>
-                    <div class="col-12 col-md-4 mt-5">
+                    <div class="col-0 col-md-1"></div>
+                    <div class="col-12 col-md-5 mt-5">
                         <div class="text-center login">
                             Welcome abroad!
                         </div>
@@ -55,24 +54,24 @@
                             Please sign in to your account
                         </div>
                         <!-- Authentication card start -->
-                        <form class="md-float-material form-material mt-5" name="frmLogin" id="frmLogin" method="POST" action="/dologin">
-                            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                        <form class="md-float-material form-material mt-5" method="POST" action="{{ route('login') }}">
+                            @csrf
                             <div class="form-group formlogin mt-3">
                                 <div class="input-icon">
                                     <i class="fas fa-user"></i>
-                                    <input type="text" name="username" id="username" onkeydown="rfEnter();" class="style-form-input" required="" maxlength="20" placeholder="Username" title="maximum 20 characters">
+                                    <input type="text" name="username" id="username" class="style-form-input" required="" maxlength="20" placeholder="Input Your Username or Email..." title="maximum 20 characters" autofocus>
                                 </div>
                             </div>
 
                             <div class="form-group formlogin mt-3">
                                 <div class="input-icon">
                                     <i class="fas fa-lock"></i>
-                                    <input type="password" name="password" id="password" class="style-form-input" required="" autocomplete="on" title="maximum 10 characters" maxlength="10" placeholder="Password" onkeydown="fnEnter();">
+                                    <input type="password" name="password" id="password" class="style-form-input" required="" autocomplete="on" title="maximum 10 characters" maxlength="10" placeholder="Input Your Password...">
                                 </div>
                             </div>
 
                             <div class="forgot-password">
-                                <a href="/forgot-password" class="forgot-password-link">Forgot Password?</a>
+                                <a href="#!" class="forgot-password-link">Forgot Password?</a>
                             </div>
 
                             <button class="btnlogin d-block mx-auto mt-2" type="submit">Log In</button>
@@ -89,6 +88,9 @@
                             </div>
                         </form>
                         <!-- end of form -->
+                        <div class="text-center mt-3">
+                            Don't have an account? <a href="{{ route('register') }}">Register here</a>
+                        </div>
                     </div>
                     <!-- end of col-sm-12 -->
                 </div>

@@ -9,7 +9,7 @@
         </div>
 
         <div class="profile--name">
-            <a href="profile.html" class="btn-link">Henry Foster</a>
+            <a href="profile.html" class="btn-link">Andika</a>
         </div>
 
         <div class="profile--nav">
@@ -40,17 +40,47 @@
     <!-- Sidebar Profile End -->
 
     <!-- Sidebar Navigation Start -->
-    <div class="sidebar--nav">
+    <div class="sidebar--nav d-none">
         <ul>
             <li>
                 <ul>
-                    <li class="py-0 py-md-1">
-                        <span class="ml-0 ml-md-3" style="color:#D99022;">MAIN MENU</span>
+                    <li class="py-1">
+                        <span class="ml-3 font-weight-bold" style="color:#D99022;">MAIN MENU</span>
                     </li>
                     <li class="{{ request()->routeIs('overview') ? 'active' : '' }}">
                         <a href="{{ route('overview') }}">
-                            <i class="fa fa-home"></i>
+                            <i class="fas fa-th-large"></i>
                             <span>Overview</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#!">
+                            <i class="fas fa-shopping-basket"></i>
+                            <span>Data</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#!">
+                            <i class="fas fa-user-secret"></i>
+                            <span>Instance</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#!">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Incident</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#!">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Statistic</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#!">
+                            <i class="fas fa-users"></i>
+                            <span>Queue</span>
                         </a>
                     </li>
                 </ul>
