@@ -4,7 +4,7 @@
     <div class="sidebar--profile">
         <div class="profile--img">
             <a href="profile.html">
-                <img src="assets/img/avatars/01_80x80.png" alt="" class="rounded-circle">
+                <img src="{{ asset('assets/img/avatars/01_80x80.png') }}" alt="" class="rounded-circle">
             </a>
         </div>
 
@@ -63,10 +63,10 @@
                             <span>Data</span>
                         </a>
                     </li>
-                    <li class="">
-                        <a href="#!">
+                    <li class="{{ request()->routeIs(['agencies.*', 'agency-details.*']) ? 'active' : '' }}">
+                        <a href="{{ route('agencies.index') }}">
                             <i class="fas fa-user-secret"></i>
-                            <span>Instance</span>
+                            <span>Agency</span>
                         </a>
                     </li>
                     <li class="">

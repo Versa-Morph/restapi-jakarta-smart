@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AgencyController;
+use App\Http\Controllers\AgencyDetailController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +24,13 @@ Route::middleware('auth:web')->group(function () {
         $data['page_title'] = 'overview';
         return view('overview.index', $data);
     })->name('overview');
+
+    Route::resource('agencies', AgencyController::class);
+    Route::get('agencies/{agency}/agency-details/create', [AgencyDetailController::class, 'create'])->name('agency-details.create');
+    Route::post('agencies/{agency}/agency-details/store', [AgencyDetailController::class, 'store'])->name('agency-details.store');
+    Route::get('agencies/{agency}/agency-details/edit/{agencyDetail}', [AgencyDetailController::class, 'edit'])->name('agency-details.edit');
+    Route::put('agencies/{agency}/agency-details/update/{agencyDetail}', [AgencyDetailController::class, 'update'])->name('agency-details.update');
+    Route::delete('agencies/{agency}/agency-details/delete/{agencyDetail}', [AgencyDetailController::class, 'destroy'])->name('agency-details.destroy');
 });
 
 
