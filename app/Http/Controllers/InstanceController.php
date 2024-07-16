@@ -6,6 +6,7 @@ use App\Models\Instance;
 use App\Models\InstanceDetail;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InstanceController extends Controller
 {
@@ -121,6 +122,95 @@ class InstanceController extends Controller
                 'type' => 'danger',
                 'message' => 'Failed to delete instance: ' . $e->getMessage(),
             ]);
+        }
+    }
+
+
+    // =========================================================================================
+    // Instance API Controller
+    // =========================================================================================
+
+    public function apiGetAllInstances()
+    {
+        try {
+            $user = Auth::user();
+
+            if (!$user) {
+                return response()->json([
+                    'code' => 404,
+                    'success' => false,
+                    'message' => 'User not authenticated',
+                    'data' => (object)[]
+                ], 404);
+            }
+
+            $instances = Instance::orderBy('created_at', 'DESC')->get();
+
+            if ($instances->isEmpty()) {
+                return response()->json([
+                    'code' => 404,
+                    'success' => false,
+                    'message' => 'Instances not found',
+                    'data' => (object)[]
+                ], 404);
+            }
+
+            return response()->json([
+                'code' => 200,
+                'success' => true,
+                'message' => 'Instances retrieved successfully',
+                'data' => $instances
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'code' => 500,
+                'success' => false,
+                'message' => 'An error occurred',
+                'data' => ['error' => $e->getMessage()]
+            ], 500);
+        }
+    }
+
+    public function apiGetInstancesByDetail()
+    {
+        try {
+            $user = Auth::user();
+
+            if (!$user) {
+                return response()->json([
+                    'code' => 404,
+                    'success' => false,
+                    'message' => 'User not authenticated',
+                    'data' => (object)[]
+                ], 404);
+            }
+
+            $instances = Instance::with('details')->orderBy('created_at', 'DESC')->get();
+
+            if ($instances->isEmpty()) {
+                return response()->json([
+                    'code' => 404,
+                    'success' => false,
+                    'message' => 'Instances not found',
+                    'data' => (object)[]
+                ], 404);
+            }
+
+            return response()->json([
+                'code' => 200,
+                'success' => true,
+                'message' => 'Instances retrieved successfully',
+                'data' => $instances
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'code' => 500,
+                'success' => false,
+                'message' => 'An error occurred',
+                'data' => ['error' => $e->getMessage()]
+            ], 500);
         }
     }
 }

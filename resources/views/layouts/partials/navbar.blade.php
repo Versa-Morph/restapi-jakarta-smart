@@ -55,7 +55,7 @@
             <!-- Nav User Start -->
             <li class="nav-item dropdown nav--user online">
                 <a href="#" class="nav-link" data-toggle="dropdown">
-                    <img src="assets/img/avatars/01_80x80.png" alt="" class="rounded-circle">
+                    <img src="{{ asset(Auth::user()->load('userBio')->profile_pict_path ?? 'profile_pictures/default.png') }}" alt="" class="rounded-circle">
                     <span>{{ Auth::user()->username }}</span>
                     <i class="fa fa-angle-down"></i>
                 </a>

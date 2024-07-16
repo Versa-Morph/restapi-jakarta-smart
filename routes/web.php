@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\AgencyDetailController;
+use App\Http\Controllers\DataController;
 use App\Http\Controllers\IncidentController;
 use App\Http\Controllers\InstanceController;
 use App\Http\Controllers\InstanceDetailController;
@@ -40,6 +41,12 @@ Route::middleware('auth:web')->group(function () {
 
     Route::prefix('incidents')->name('incidents.')->group(function () {
         Route::get('/', [IncidentController::class, 'index'])->name('index');
+        Route::get('/queue', [IncidentController::class, 'queue'])->name('queue');
+    });
+
+    Route::prefix('data')->name('data.')->group(function () {
+        Route::get('/', [DataController::class, 'index'])->name('index');
+        Route::get('/users/{id}/detail', [DataController::class, 'getUserDetail']);
     });
 });
 

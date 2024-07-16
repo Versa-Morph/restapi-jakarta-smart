@@ -28,6 +28,7 @@
         $('#instances-table').DataTable();
         $('#instances-details-table').DataTable();
         $('#incidents-table').DataTable();
+        $('#data-table').DataTable();
     });
 </script>
 
@@ -48,3 +49,5 @@
         })
     }
 </script>
+
+@stack('script')

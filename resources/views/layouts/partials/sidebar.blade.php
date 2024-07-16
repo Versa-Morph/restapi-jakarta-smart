@@ -4,7 +4,7 @@
     <div class="sidebar--profile">
         <div class="profile--img">
             <a href="profile.html">
-                <img src="{{ asset('assets/img/avatars/01_80x80.png') }}" alt="" class="rounded-circle">
+                <img src="{{ asset(Auth::user()->load('userBio')->profile_pict_path ?? 'profile_pictures/default.png') }}" alt="" class="rounded-circle">
             </a>
         </div>
 
@@ -57,8 +57,8 @@
                             <span>Overview</span>
                         </a>
                     </li>
-                    <li class="">
-                        <a href="#!">
+                    <li class="{{ request()->routeIs('data.index') ? 'active' : '' }}">
+                        <a href="{{ route('data.index') }}">
                             <i class="fas fa-shopping-basket"></i>
                             <span>Data</span>
                         </a>
@@ -69,7 +69,7 @@
                             <span>Instance</span>
                         </a>
                     </li>
-                    <li class="{{ request()->routeIs('incidents.*') ? 'active' : '' }}">
+                    <li class="{{ request()->routeIs('incidents.index') ? 'active' : '' }}">
                         <a href="{{ route('incidents.index') }}">
                             <i class="fas fa-calendar-alt"></i>
                             <span>Incident</span>
@@ -81,8 +81,8 @@
                             <span>Statistic</span>
                         </a>
                     </li>
-                    <li class="">
-                        <a href="#!">
+                    <li class="{{ request()->routeIs('incidents.queue') ? 'active' : '' }}">
+                        <a href="{{ route('incidents.queue') }}">
                             <i class="fas fa-users"></i>
                             <span>Queue</span>
                         </a>

@@ -41,12 +41,22 @@ class User extends Authenticatable implements JWTSubject
 
     public function userBio()
     {
-        return $this->hasOne(UserBio::class);
+        return $this->hasOne(UserBio::class, 'user_id');
     }
 
     public function userContact()
     {
         return $this->hasMany(UserContact::class);
+    }
+
+    public function callerIncidents()
+    {
+        return $this->hasMany(Incident::class, 'caller_id');
+    }
+
+    public function responderIncidents()
+    {
+        return $this->hasMany(Incident::class, 'responder_id');
     }
 
     public function getJWTIdentifier()

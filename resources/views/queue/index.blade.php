@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-header p-3">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h3 class="mb-0">Incidents</h3>
+                        <h3 class="mb-0">Queue</h3>
                     </div>
                 </div>
                 <div class="card-body">
@@ -23,7 +23,6 @@
                                 <th>Caller</th>
                                 <th>Responder</th>
                                 <th>Status</th>
-                                {{-- <th width="20%">Actions</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -34,21 +33,8 @@
                                 <td>{{ $incident->caller->username }}</td>
                                 <td>{{ $incident->responder->username }}</td>
                                 <td>
-                                    @if($incident->status == 'processed')
-                                        <span class="badge badge-warning">&nbsp;</span> processed
-                                    @elseif($incident->status == 'completed')
-                                        <span class="badge badge-success">&nbsp;</span> completed
-                                    @endif
+                                    <span class="badge badge-warning">&nbsp;</span> {{ $incident->status }}
                                 </td>
-                                {{-- <td>
-                                    <a href="{{ route('incidents.show', $incident->id) }}" class="btn btn-info">View</a>
-                                    <a href="{{ route('incidents.edit', $incident->id) }}" class="btn btn-warning">Edit</a>
-                                    <form action="{{ route('incidents.destroy', $incident->id) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </form>
-                                </td> --}}
                             </tr>
                             @endforeach
                         </tbody>

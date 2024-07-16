@@ -17,8 +17,8 @@ class CreateIncidentsTable extends Migration
         Schema::create('incidents', function (Blueprint $table) {
             $table->id();
             $table->string('incident_number')->unique();
-            $table->string('caller');
-            $table->string('responder');
+            $table->foreignId('caller_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('responder_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->string('image')->nullable();
             $table->timestamp('request_datetime')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('process_datetime')->nullable();

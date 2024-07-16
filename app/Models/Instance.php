@@ -13,6 +13,6 @@ class Instance extends Model
 
     public function details()
     {
-        return $this->hasMany(InstanceDetail::class);
+        return $this->hasMany(InstanceDetail::class, 'instance_id');
     }
 }

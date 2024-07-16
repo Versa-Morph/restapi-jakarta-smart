@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\IncidentController;
+use App\Http\Controllers\InstanceController;
 use App\Http\Controllers\UserBioController;
 use App\Http\Controllers\UserContactController;
 use Illuminate\Http\Request;
@@ -40,10 +41,13 @@ Route::middleware('auth:api')->group(function () {
     Route::put('user-contacts/{id}', [UserContactController::class, 'update']);
     Route::delete('user-contacts/{id}', [UserContactController::class, 'destroy']);
 
-    // User Contacts
-    Route::get('incidents', [IncidentController::class, 'apiGetMyIncident']);
+    // Incidents
+    Route::get('incidents', [IncidentController::class, 'apiGetAllInstances']);
     Route::get('incidents/group-by-status', [IncidentController::class, 'apiGetMyIncidentByStatus']);
     Route::post('incidents', [IncidentController::class, 'apiStoreIncident']);
-    // Route::put('incidents/{id}', [UserContactController::class, 'update']);
-    // Route::delete('incidents/{id}', [UserContactController::class, 'destroy']);
+
+    // Instances
+    Route::get('instances', [InstanceController::class, 'apiGetAllInstances']);
+    Route::get('instances/group-by-detail', [InstanceController::class, 'apiGetInstancesByDetail']);
+    Route::post('instances', [InstanceController::class, 'apiStoreIncident']);
 });
