@@ -24,9 +24,9 @@ class UserBioController extends Controller
             'blood_type'    => 'nullable|string|max:3',
             'height'        => 'nullable|integer',
             'weight'        => 'nullable|integer',
-            'phone_number'  => 'unique|regex:/^08[0-9]{9,11}$/'
+            'phone_number'  => ['nullable', 'regex:/^08[0-9]{9,11}$/', Rule::unique('user_bio')->ignore(Auth::id(), 'user_id')]
         ]);
-
+        // dd();
         if ($validator->fails()) {
             return response()->json([
                 'code' => 400,
@@ -71,11 +71,7 @@ class UserBioController extends Controller
             'blood_type'        => $request->blood_type,
             'height'            => $request->height,
             'weight'            => $request->weight,
-            'phone_number'  => [
-                'required',
-                'regex:/^08[0-9]{9,11}$/',
-                Rule::unique('user_bio')->ignore($userBio->id)
-            ]
+            'phone_number'      => $request->phone_number
         ]);
 
         $userBio->save();
