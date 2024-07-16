@@ -69,8 +69,8 @@
                             <span>Instance</span>
                         </a>
                     </li>
-                    <li class="">
-                        <a href="#!">
+                    <li class="{{ request()->routeIs('incidents.*') ? 'active' : '' }}">
+                        <a href="{{ route('incidents.index') }}">
                             <i class="fas fa-calendar-alt"></i>
                             <span>Incident</span>
                         </a>

@@ -10,8 +10,7 @@
             <div class="card">
                 <div class="card-header p-3">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h3>Incidents</h3>
-                        <a href="{{ route('incidents.create') }}" class="btn btn-primary">Create Data</a>
+                        <h3 class="mb-0">Incidents</h3>
                     </div>
                 </div>
                 <div class="card-body">

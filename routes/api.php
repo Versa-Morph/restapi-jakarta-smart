@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\IncidentController;
 use App\Http\Controllers\UserBioController;
 use App\Http\Controllers\UserContactController;
 use Illuminate\Http\Request;
@@ -38,4 +39,11 @@ Route::middleware('auth:api')->group(function () {
     Route::post('user-contacts', [UserContactController::class, 'store']);
     Route::put('user-contacts/{id}', [UserContactController::class, 'update']);
     Route::delete('user-contacts/{id}', [UserContactController::class, 'destroy']);
+
+    // User Contacts
+    Route::get('incidents', [IncidentController::class, 'apiGetMyIncident']);
+    Route::get('incidents/group-by-status', [IncidentController::class, 'apiGetMyIncidentByStatus']);
+    Route::post('incidents', [IncidentController::class, 'apiStoreIncident']);
+    // Route::put('incidents/{id}', [UserContactController::class, 'update']);
+    // Route::delete('incidents/{id}', [UserContactController::class, 'destroy']);
 });
