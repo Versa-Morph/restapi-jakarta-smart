@@ -25,8 +25,9 @@
 <!-- Page Level Scripts -->
 <script>
     $(document).ready(function() {
-        $('#agencies-table').DataTable();
-        $('#agency-details-table').DataTable();
+        $('#instances-table').DataTable();
+        $('#instances-details-table').DataTable();
+        $('#incidents-table').DataTable();
     });
 </script>
 

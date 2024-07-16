@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAgencyDetailIdToUsersTable extends Migration
+class AddInstanceDetailIdToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddAgencyDetailIdToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('agency_detail_id')->nullable()->constrained('agency_details')->onDelete('cascade');
+            $table->foreignId('instance_detail_id')->nullable()->constrained('instance_details')->onDelete('cascade');
         });
     }
 
@@ -26,8 +26,8 @@ class AddAgencyDetailIdToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['agency_detail_id']);
-            $table->dropColumn('agency_detail_id');
+            $table->dropForeign(['instance_detail_id']);
+            $table->dropColumn('instance_detail_id');
         });
     }
 }

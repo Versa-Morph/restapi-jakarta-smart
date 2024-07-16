@@ -63,10 +63,10 @@
                             <span>Data</span>
                         </a>
                     </li>
-                    <li class="{{ request()->routeIs(['agencies.*', 'agency-details.*']) ? 'active' : '' }}">
-                        <a href="{{ route('agencies.index') }}">
+                    <li class="{{ request()->routeIs(['instances.*', 'instance-details.*']) ? 'active' : '' }}">
+                        <a href="{{ route('instances.index') }}">
                             <i class="fas fa-user-secret"></i>
-                            <span>Agency</span>
+                            <span>Instance</span>
                         </a>
                     </li>
                     <li class="">

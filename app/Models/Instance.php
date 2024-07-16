@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Agency extends Model
+class Instance extends Model
 {
     use HasFactory;
+
     protected $fillable = ['name', 'icon'];
 
     public function details()
     {
-        return $this->hasMany(AgencyDetail::class);
+        return $this->hasMany(InstanceDetail::class);
     }
 }

@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\AgencyDetailController;
+use App\Http\Controllers\IncidentController;
+use App\Http\Controllers\InstanceController;
+use App\Http\Controllers\InstanceDetailController;
+use App\Models\Incident;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,17 +24,23 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth:web')->group(function () {
+    // Overview
     Route::get('/overview', function () {
         $data['page_title'] = 'overview';
         return view('overview.index', $data);
     })->name('overview');
 
-    Route::resource('agencies', AgencyController::class);
-    Route::get('agencies/{agency}/agency-details/create', [AgencyDetailController::class, 'create'])->name('agency-details.create');
-    Route::post('agencies/{agency}/agency-details/store', [AgencyDetailController::class, 'store'])->name('agency-details.store');
-    Route::get('agencies/{agency}/agency-details/edit/{agencyDetail}', [AgencyDetailController::class, 'edit'])->name('agency-details.edit');
-    Route::put('agencies/{agency}/agency-details/update/{agencyDetail}', [AgencyDetailController::class, 'update'])->name('agency-details.update');
-    Route::delete('agencies/{agency}/agency-details/delete/{agencyDetail}', [AgencyDetailController::class, 'destroy'])->name('agency-details.destroy');
+    // Instance & Detail
+    Route::resource('instances', InstanceController::class);
+    Route::get('instances/{instance}/instance-details/create', [InstanceDetailController::class, 'create'])->name('instance-details.create');
+    Route::post('instances/{instance}/instance-details/store', [InstanceDetailController::class, 'store'])->name('instance-details.store');
+    Route::get('instances/{instance}/instance-details/edit/{instanceDetail}', [InstanceDetailController::class, 'edit'])->name('instance-details.edit');
+    Route::put('instances/{instance}/instance-details/update/{instanceDetail}', [InstanceDetailController::class, 'update'])->name('instance-details.update');
+    Route::delete('instances/{instance}/instance-details/delete/{instanceDetail}', [InstanceDetailController::class, 'destroy'])->name('instance-details.destroy');
+
+    Route::prefix('incidents')->name('incidents.')->group(function () {
+        Route::get('/', [IncidentController::class, 'index'])->name('index');
+    });
 });
 
 
