@@ -75,14 +75,14 @@
                             <span>Incident</span>
                         </a>
                     </li>
-                    <li class="">
-                        <a href="#!">
+                    <li class="{{ request()->routeIs('statistic.index') ? 'active' : '' }}">
+                        <a href="{{ route('statistic.index') }}">
                             <i class="fas fa-chart-bar"></i>
                             <span>Statistic</span>
                         </a>
                     </li>
-                    <li class="{{ request()->routeIs('incidents.queue') ? 'active' : '' }}">
-                        <a href="{{ route('incidents.queue') }}">
+                    <li class="{{ request()->routeIs('queue.index') ? 'active' : '' }}">
+                        <a href="{{ route('queue.index') }}">
                             <i class="fas fa-users"></i>
                             <span>Queue</span>
                         </a>

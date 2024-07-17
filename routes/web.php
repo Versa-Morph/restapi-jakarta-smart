@@ -6,7 +6,9 @@ use App\Http\Controllers\DataController;
 use App\Http\Controllers\IncidentController;
 use App\Http\Controllers\InstanceController;
 use App\Http\Controllers\InstanceDetailController;
+use App\Http\Controllers\StatisticController;
 use App\Models\Incident;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +29,14 @@ Route::get('/', function () {
 Route::middleware('auth:web')->group(function () {
     // Overview
     Route::get('/overview', function () {
+        $today = Carbon::today();
+
         $data['page_title'] = 'overview';
+        $data['all_incident'] = Incident::whereDate('request_datetime', $today)->count();
+        $data['queue_incident'] = Incident::where('status', 'requested')->whereDate('request_datetime', $today)->count();
+        $data['processed_incident'] = Incident::where('status', 'processed')->whereDate('request_datetime', $today)->count();
+        $data['completed_incident'] = Incident::where('status', 'completed')->whereDate('request_datetime', $today)->count();
+
         return view('overview.index', $data);
     })->name('overview');
 
@@ -41,7 +50,15 @@ Route::middleware('auth:web')->group(function () {
 
     Route::prefix('incidents')->name('incidents.')->group(function () {
         Route::get('/', [IncidentController::class, 'index'])->name('index');
-        Route::get('/queue', [IncidentController::class, 'queue'])->name('queue');
+    });
+
+    Route::prefix('queue')->name('queue.')->group(function () {
+        Route::get('/', [IncidentController::class, 'queue'])->name('index');
+    });
+
+    Route::prefix('statistic')->name('statistic.')->group(function () {
+        Route::get('/', [StatisticController::class, 'index'])->name('index');
+        Route::get('/chart-data', [StatisticController::class, 'getIncidentChartData']);
     });
 
     Route::prefix('data')->name('data.')->group(function () {

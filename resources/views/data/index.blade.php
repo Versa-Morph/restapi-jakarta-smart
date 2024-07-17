@@ -30,7 +30,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>
-                                    <img src="{{ asset($user->userBio->profile_pict_path) }}" alt="Profile Picture" class="img-fluid" width="60" height="60" style="border-radius: 50%;">
+                                    <img src="{{ asset($user->userBio->profile_pict_path ?? '') }}" alt="Profile Picture" class="img-fluid" width="60" height="60" style="border-radius: 50%;">
                                 </td>
                                 <td>{{ $user->username }}</td>
                                 <td>{{ $user->email }}</td>

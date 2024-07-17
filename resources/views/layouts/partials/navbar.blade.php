@@ -38,13 +38,13 @@
 
     <div class="navbar--nav ml-auto">
         <ul class="nav">
-            <li class="nav-item">
+            <li class="nav-item d-none">
                 <a href="#!" class="nav-link px-3">
                     <i class="far fa-envelope" style="font-size: 25px; color:#2C2828;"></i>
                 </a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item d-none">
                 <a href="#" class="nav-link px-3">
                     <span class="badge text-white bg-orange">&nbsp;</span>
                     <i class="far fa-bell" style="font-size: 25px; color:#2C2828;"></i>
@@ -61,11 +61,6 @@
                 </a>
 
                 <ul class="dropdown-menu">
-                    <li><a href="#!"><i class="far fa-user"></i>Profile</a></li>
-                    <li><a href="#!"><i class="far fa-envelope"></i>Inbox</a></li>
-                    <li><a href="#"><i class="fa fa-cog"></i>Settings</a></li>
-                    <li class="dropdown-divider"></li>
-                    <li><a href="#!"><i class="fa fa-lock"></i>Lock Screen</a></li>
                     <li><a href="#!" onclick="event.preventDefault(); confirmLogout()"><i class="fa fa-power-off"></i>Logout</a> <form id="logout-form" action="{{ route('logout') }}" method="post" style="display: none;">@csrf</form></li>
                 </ul>
             </li>

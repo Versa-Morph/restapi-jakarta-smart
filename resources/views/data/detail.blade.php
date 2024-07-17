@@ -12,18 +12,18 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="{{ asset($user->userBio->profile_pict_path) }}" alt="Profile Picture" class="img-fluid">
+                        <img src="{{ asset($user->userBio->profile_pict_path ?? '') }}" alt="Profile Picture" class="img-fluid">
                     </div>
                     <div class="col-md-8">
-                        <h5>{{ $user->userBio->full_name }}</h5>
-                        <p>Nickname: {{ $user->userBio->nickname }}</p>
-                        <p>City: {{ $user->userBio->city }}</p>
-                        <p>Address: {{ $user->userBio->address }}</p>
-                        <p>Age: {{ $user->userBio->age }}</p>
-                        <p>Blood Type: {{ $user->userBio->blood_type }}</p>
-                        <p>Height: {{ $user->userBio->height }}</p>
-                        <p>Weight: {{ $user->userBio->weight }}</p>
-                        <p>Phone Number: {{ $user->userBio->phone_number }}</p>
+                        <h5>{{ $user->userBio->full_name ?? '-' }}</h5>
+                        <p>Nickname: {{ $user->userBio->nickname ?? '-' }}</p>
+                        <p>City: {{ $user->userBio->city ?? '-' }}</p>
+                        <p>Address: {{ $user->userBio->address ?? '-' }}</p>
+                        <p>Age: {{ $user->userBio->age ?? '-' }}</p>
+                        <p>Blood Type: {{ $user->userBio->blood_type ?? '-' }}</p>
+                        <p>Height: {{ $user->userBio->height ?? '-' }}</p>
+                        <p>Weight: {{ $user->userBio->weight ?? '-' }}</p>
+                        <p>Phone Number: {{ $user->userBio->phone_number ?? '-' }}</p>
                     </div>
                 </div>
             </div>
