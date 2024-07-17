@@ -41,6 +41,10 @@
                         </div>
                     </div>
                     <div class="form-group mb-3">
+                        <label for="pluscode">Plus Code</label>
+                        <input type="text" name="pluscode" class="form-control" required>
+                    </div>
+                    <div class="form-group mb-3">
                         <label for="address">Address</label>
                         <input type="text" name="address" class="form-control" required>
                     </div>

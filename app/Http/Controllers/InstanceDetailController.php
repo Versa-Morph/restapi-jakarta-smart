@@ -20,6 +20,7 @@ class InstanceDetailController extends Controller
         $request->validate([
             'instance_id' => 'required|exists:instances,id',
             'name'        => 'required',
+            'pluscode'    => 'required',
             'address'     => 'required',
             'longitude'   => 'required|numeric',
             'latitude'    => 'required|numeric',
@@ -60,11 +61,12 @@ class InstanceDetailController extends Controller
     {
         $request->validate([
             'instance_id' => 'required|exists:instances,id',
-            'name'      => 'required',
-            'address'   => 'required',
-            'longitude' => 'required|numeric',
-            'latitude'  => 'required|numeric',
-            'logo'      => 'nullable|image|mimes:png,jpg,jpeg,webp|max:2048',
+            'name'        => 'required',
+            'pluscode'    => 'required',
+            'address'     => 'required',
+            'longitude'   => 'required|numeric',
+            'latitude'    => 'required|numeric',
+            'logo'        => 'nullable|image|mimes:png,jpg,jpeg,webp|max:2048',
         ]);
 
         try {

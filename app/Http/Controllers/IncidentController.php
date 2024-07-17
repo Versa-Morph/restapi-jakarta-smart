@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Incident;
+use App\Models\Instance;
+use App\Models\InstanceDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -168,7 +170,7 @@ class IncidentController extends Controller
         $validator = Validator::make($request->all(), [
             'description'        => 'nullable|string',
             'image'              => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'responder_id'       => 'nullable|exists:users,id',
+            'pluscode'           => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -205,10 +207,12 @@ class IncidentController extends Controller
                  $imagePath = 'incident_images/' . $filename;
             }
 
+            $instanceResponder = InstanceDetail::where('pluscode', $request->pluscode)->first();
+
             $incident = Incident::create([
                 'incident_number'    => $incidentNumber,
                 'caller_id'          => $user->id,
-                'responder_id'       => $request->responder_id,
+                'responder_id'       => $instanceResponder->id,
                 'description'        => $request->description,
                 'image'              => $imagePath,
                 'request_datetime'   => now(),

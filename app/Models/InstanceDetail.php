@@ -11,7 +11,7 @@ class InstanceDetail extends Model
 
     protected $table = 'instance_details';
 
-    protected $fillable = ['instance_id', 'name', 'logo', 'address', 'longitude', 'latitude'];
+    protected $fillable = ['instance_id', 'name', 'pluscode', 'logo', 'address', 'longitude', 'latitude'];
 
     public function instance()
     {

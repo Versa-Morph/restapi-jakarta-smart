@@ -38,6 +38,7 @@
                                 <th width="8%">Logo</th>
                                 <th>Name</th>
                                 <th>Address</th>
+                                <th>Pluscode</th>
                                 <th>Longitude</th>
                                 <th>Latitude</th>
                                 <th width="20%">Actions</th>
@@ -50,6 +51,7 @@
                                 <td><img src="{{ asset($instanceDetail->logo) }}" width="50" alt="" class="d-block mx-auto" style="border-radius: 50%;"></td>
                                 <td>{{ $instanceDetail->name }}</td>
                                 <td>{{ $instanceDetail->address }}</td>
+                                <td>{{ $instanceDetail->pluscode }}</td>
                                 <td>{{ $instanceDetail->longitude }}</td>
                                 <td>{{ $instanceDetail->latitude }}</td>
                                 <td>
