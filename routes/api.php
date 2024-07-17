@@ -42,7 +42,7 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('user-contacts/{id}', [UserContactController::class, 'destroy']);
 
     // Incidents
-    Route::get('incidents', [IncidentController::class, 'apiGetAllInstances']);
+    Route::get('incidents', [IncidentController::class, 'apiGetMyIncident']);
     Route::get('incidents/group-by-status', [IncidentController::class, 'apiGetMyIncidentByStatus']);
     Route::post('incidents', [IncidentController::class, 'apiStoreIncident']);
 

@@ -34,6 +34,12 @@
 
         <script type="text/javascript" src="{{ asset('assets/auth/vendor/jquery/dist/jquery.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('assets/auth/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+
+        <style>
+            a:focus, a:hover {
+                color: #D99022;
+            }
+        </style>
     </head>
 
     <body class="fix-menu">
@@ -76,16 +82,6 @@
 
                             <button class="btnlogin d-block mx-auto mt-2" type="submit">Log In</button>
 
-                            <div class="social-login mt-4">
-                                <div class="divider">
-                                    <span>Or continue with</span>
-                                </div>
-                                <div class="social-buttons">
-                                    <button class="social-btn google"><i class="fab fa-google"></i></button>
-                                    <button class="social-btn apple"><i class="fab fa-apple"></i></button>
-                                    <button class="social-btn facebook"><i class="fab fa-facebook-f"></i></button>
-                                </div>
-                            </div>
                         </form>
                         <!-- end of form -->
                         <div class="text-center mt-3">

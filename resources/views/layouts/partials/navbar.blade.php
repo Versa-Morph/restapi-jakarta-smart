@@ -3,8 +3,8 @@
     <!-- Navbar Header Start -->
     <div class="navbar--header">
         <!-- Logo Start -->
-        <a href="index.html" class="logo">
-            <img src="assets/img/logo-smartJKT.png" alt="" width="80%" class="d-block mx-auto">
+        <a href="{{ route('overview') }}" class="logo">
+            <img src="{{ asset('assets/img/logo-smartJKT.png') }}" alt="" width="80%" class="d-block mx-auto">
         </a>
         <!-- Logo End -->
 

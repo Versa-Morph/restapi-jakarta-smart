@@ -34,6 +34,11 @@
 
     <script type="text/javascript" src="{{ asset('assets/auth/vendor/jquery/dist/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/auth/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <style>
+        a:focus, a:hover {
+            color: #D99022;
+        }
+    </style>
 </head>
 
 <body class="fix-menu">
