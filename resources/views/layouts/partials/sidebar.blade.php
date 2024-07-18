@@ -69,16 +69,18 @@
                             <span>Instance</span>
                         </a>
                     </li>
-                    <li class="{{ request()->routeIs('incidents.index') ? 'active' : '' }}">
-                        <a href="{{ route('incidents.index') }}">
-                            <i class="fas fa-calendar-alt"></i>
-                            <span>Incident</span>
-                        </a>
-                    </li>
+                    @endif
+
                     <li class="{{ request()->routeIs('statistic.index') ? 'active' : '' }}">
                         <a href="{{ route('statistic.index') }}">
                             <i class="fas fa-chart-bar"></i>
                             <span>Statistic</span>
+                        </a>
+                    </li>
+                    <li class="{{ request()->routeIs('incidents.index') ? 'active' : '' }}">
+                        <a href="{{ route('incidents.index') }}">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Incident</span>
                         </a>
                     </li>
                     <li class="{{ request()->routeIs('queue.index') ? 'active' : '' }}">
@@ -87,7 +89,6 @@
                             <span>Queue</span>
                         </a>
                     </li>
-                    @endif
                 </ul>
             </li>
         </ul>

@@ -19,6 +19,8 @@ class Incident extends Model
         'complete_datetime',
         'status',
         'description',
+        'longitude',
+        'latitude',
     ];
 
     public function caller()

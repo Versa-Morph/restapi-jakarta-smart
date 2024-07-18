@@ -9,6 +9,7 @@
 <meta name="author" content="">
 <meta name="description" content="">
 <meta name="keywords" content="">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <!-- ==== Favicon ==== -->
 <link rel="icon" href="{{ asset('assets/img/logo-title.png') }}" type="image/png">
@@ -36,3 +37,24 @@
 <link href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css" rel="stylesheet">
 <!-- Page Level Stylesheets -->
 @stack('css')
+
+<style>
+    .btn {
+        border-radius: 8px;
+    }
+    .btn-primary {
+        background-color: rgb(15, 118, 215);
+    }
+    .btn-primary:hover {
+        background-color: rgb(15, 95, 170);
+    }
+    .btn-warning {
+        background-color: rgb(248, 214, 24);
+    }
+    .btn-warning:hover {
+        background-color: rgb(218, 184, 15);
+    }
+    .btn-danger:hover {
+        background-color: #e22727;
+    }
+</style>

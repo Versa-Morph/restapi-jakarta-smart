@@ -105,7 +105,7 @@
         <div class="row gutter-20">
             <div class="col-sm-12">
                 <div class="card" style="border-radius: 20px;">
-                    <div class="card-header p-3">
+                    <div class="card-header p-3" style="border-radius: 20px 20px 0 0;">
                         <h3 class="m-0 text-center">MAPS INDONESIA</h3>
                     </div>
                     <div class="card-body">

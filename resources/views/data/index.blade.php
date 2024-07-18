@@ -7,10 +7,10 @@
 <section class="main--content">
     <div class="row gutter-20">
         <div class="col-12">
-            <div class="card">
-                <div class="card-header p-3">
+            <div class="card" style="border-radius: 20px;">
+                <div class="card-header p-3" style="border-radius: 20px 20px 0 0;">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h3 class="mb-0">Data</h3>
+                        <h3 class="mb-0">Data Pengguna</h3>
                     </div>
                 </div>
                 <div class="card-body">

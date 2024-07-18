@@ -8,8 +8,8 @@
 <section class="main--content">
     <div class="row gutter-20">
         <div class="col-12 col-md-4">
-            <div class="card">
-                <div class="card-header p-3">
+            <div class="card" style="border-radius: 20px;">
+                <div class="card-header p-3" style="border-radius: 20px 20px 0 0;">
                     <div class="d-flex justify-content-between align-items-center">
                         <h3 class="m-0 p-0">Data Instances</h3>
                         <a href="{{ route('instances.index') }}" class="btn btn-danger">Back</a>
@@ -22,8 +22,8 @@
             </div>
         </div>
         <div class="col-12 col-md-8">
-            <div class="card">
-                <div class="card-header p-3">
+            <div class="card" style="border-radius: 20px;">
+                <div class="card-header p-3" style="border-radius: 20px 20px 0 0;">
                     <div class="d-flex justify-content-between align-items-center">
                         <h3 class="m-0 p-0">Detail Instances</h3>
                         <a href="{{ route('instance-details.create', $instance) }}" class="btn btn-primary">Create Data</a>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Incident;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StatisticController extends Controller
 {
@@ -21,10 +22,16 @@ class StatisticController extends Controller
         $startDate = $request->get('start_date') ? Carbon::parse($request->get('start_date'))->startOfDay() : Carbon::now()->subDays(30)->startOfDay();
         $endDate = $request->get('end_date') ? Carbon::parse($request->get('end_date'))->endOfDay() : Carbon::now()->endOfDay();
 
+        $user = Auth::user();
         $query = Incident::query();
 
         if ($startDate && $endDate) {
             $query->whereBetween('request_datetime', [$startDate, $endDate]);
+        }
+
+        // Adjust query for non-admin users
+        if ($user->role !== 'admin') {
+            $query->where('responder_id', $user->id);
         }
 
         switch ($range) {
@@ -93,4 +100,5 @@ class StatisticController extends Controller
             'completed' => $completedCounts
         ]);
     }
+
 }

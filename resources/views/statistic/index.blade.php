@@ -6,9 +6,9 @@
 @section('content')
 <section class="main--content">
     <div class="row gutter-20">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header p-3">
+        <div class="col-12 mb-5">
+            <div class="card" style="border-radius: 20px;">
+                <div class="card-header p-3" style="border-radius: 20px 20px 0 0;">
                     <div class="d-flex justify-content-between align-items-center">
                         <h3 class="mb-0">Statistic</h3>
                     </div>

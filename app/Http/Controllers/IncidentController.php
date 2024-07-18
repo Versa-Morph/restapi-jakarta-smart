@@ -20,16 +20,72 @@ class IncidentController extends Controller
      */
     public function index()
     {
-        $incidents   = Incident::where('status', '!=', 'requested')->orderBy('created_at', 'DESC')->get();
-        $page_title = 'incidents';
+        $user = Auth::user();
+        $page_title = 'Incidents';
+
+        $query = Incident::where('status', '!=', 'requested')->orderBy('created_at', 'DESC');
+
+        if ($user->role !== 'admin') {
+            $query->where('responder_id', $user->id);
+        }
+
+        $incidents = $query->get();
 
         return view('incidents.index', compact('incidents', 'page_title'));
     }
 
+    public function complete($id, Request $request)
+    {
+        $incident = Incident::find($id);
+
+        if (!$incident) {
+            return response()->json(['message' => 'Incident not found'], 404);
+        }
+
+        $user = Auth::user();
+
+        if ($incident->responder_id !== $user->id) {
+            return response()->json(['message' => 'Instansi terkait yang hanya dapat menyelesaikan!'], 403);
+        }
+
+        $incident->status = 'completed';
+        $incident->save();
+
+        return response()->json(['message' => 'Incident completed successfully']);
+    }
+
+    public function accept($id, Request $request)
+    {
+        $incident = Incident::find($id);
+
+        if (!$incident) {
+            return response()->json(['message' => 'Incident not found'], 404);
+        }
+
+        $user = Auth::user();
+
+        if ($incident->responder_id !== $user->id) {
+            return response()->json(['message' => 'Instansi terkait yang hanya dapat menerima!'], 403);
+        }
+
+        $incident->status = 'processed';
+        $incident->save();
+
+        return response()->json(['message' => 'Incident accepted successfully']);
+    }
+
     public function queue()
     {
-        $incidents   = Incident::where('status', 'requested')->orderBy('created_at', 'DESC')->get();
+        $user = Auth::user();
         $page_title = 'Queue';
+
+        $query = Incident::where('status', 'requested')->orderBy('created_at', 'DESC');
+
+        if ($user->role !== 'admin') {
+            $query->where('responder_id', $user->id);
+        }
+
+        $incidents = $query->get();
 
         return view('queue.index', compact('incidents', 'page_title'));
     }
@@ -168,9 +224,11 @@ class IncidentController extends Controller
     public function apiStoreIncident(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'description'        => 'nullable|string',
-            'image'              => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'pluscode'           => 'required',
+            'description' => 'required|string',
+            'image'       => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'pluscode'    => 'required',
+            'longitude'   => 'nullable|numeric',
+            'latitude'    => 'nullable|numeric',
         ]);
 
         if ($validator->fails()) {
@@ -214,6 +272,8 @@ class IncidentController extends Controller
                 'caller_id'          => $user->id,
                 'responder_id'       => $instanceResponder->users[0]->id,
                 'description'        => $request->description,
+                'longitude'          => $request->longitude,
+                'latitude'           => $request->latitude,
                 'image'              => $imagePath,
                 'request_datetime'   => now(),
                 'process_datetime'   => null,

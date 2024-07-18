@@ -36,21 +36,23 @@ Route::middleware('auth:web')->group(function () {
 
         $data['page_title'] = 'overview';
         $data['user'] = $user;
-        // Base query
-        $query = Incident::whereDate('request_datetime', $today);
 
-        // Adjust query for non-admin users
+        $baseQuery = Incident::whereDate('request_datetime', $today);
+
         if ($user->role !== 'admin') {
-            $query->where('responder_id', $user->id);
+            $baseQuery->where('responder_id', $user->id);
             $data['instance'] = InstanceDetail::where('id', $user->instance_detail_id)->first();
         }
 
-        // Get counts
-        $data['all_incident'] = $query->count();
-        $data['queue_incident'] = $query->where('status', 'requested')->count();
-        $data['processed_incident'] = $query->where('status', 'processed')->count();
-        $data['completed_incident'] = $query->where('status', 'completed')->count();
+        $data['all_incident'] = $baseQuery->count();
 
+        $queueQuery = clone $baseQuery;
+        $processedQuery = clone $baseQuery;
+        $completedQuery = clone $baseQuery;
+
+        $data['queue_incident'] = $queueQuery->where('status', 'requested')->count();
+        $data['processed_incident'] = $processedQuery->where('status', 'processed')->count();
+        $data['completed_incident'] = $completedQuery->where('status', 'completed')->count();
         return view('overview.index', $data);
     })->name('overview');
 
@@ -64,10 +66,12 @@ Route::middleware('auth:web')->group(function () {
 
     Route::prefix('incidents')->name('incidents.')->group(function () {
         Route::get('/', [IncidentController::class, 'index'])->name('index');
+        Route::post('/{id}/complete', [IncidentController::class, 'complete'])->name('complete');
     });
 
     Route::prefix('queue')->name('queue.')->group(function () {
         Route::get('/', [IncidentController::class, 'queue'])->name('index');
+        Route::post('/{id}/accept', [IncidentController::class, 'accept'])->name('accept');
     });
 
     Route::prefix('statistic')->name('statistic.')->group(function () {
