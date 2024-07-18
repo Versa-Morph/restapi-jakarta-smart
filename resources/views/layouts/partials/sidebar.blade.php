@@ -56,12 +56,6 @@
                             <span>Overview</span>
                         </a>
                     </li>
-                    <li class="{{ request()->routeIs('overview') ? 'active' : '' }}">
-                        <a href="{{ route('overview') }}">
-                            <i class="fas fa-th-large"></i>
-                            <span>Maps</span>
-                        </a>
-                    </li>
                     @if(Auth::user()->role == 'admin')
                     <li class="{{ request()->routeIs('data.index') ? 'active' : '' }}">
                         <a href="{{ route('data.index') }}">

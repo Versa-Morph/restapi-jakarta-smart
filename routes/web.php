@@ -8,6 +8,7 @@ use App\Http\Controllers\InstanceController;
 use App\Http\Controllers\InstanceDetailController;
 use App\Http\Controllers\StatisticController;
 use App\Models\Incident;
+use App\Models\InstanceDetail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -34,13 +35,14 @@ Route::middleware('auth:web')->group(function () {
         $user = Auth::user();
 
         $data['page_title'] = 'overview';
-
+        $data['user'] = $user;
         // Base query
         $query = Incident::whereDate('request_datetime', $today);
 
         // Adjust query for non-admin users
         if ($user->role !== 'admin') {
             $query->where('responder_id', $user->id);
+            $data['instance'] = InstanceDetail::where('id', $user->instance_detail_id)->first();
         }
 
         // Get counts
