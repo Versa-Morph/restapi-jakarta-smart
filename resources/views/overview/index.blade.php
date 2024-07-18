@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="{{ asset('assets/css/maps.css') }}">
 
 <style>
-.page-content{
+.page-content {
     padding: calc(45px + 24px) calc(1px / 2) 45px calc(1px / 2) !important;
 }
 
@@ -38,21 +38,55 @@
         transition: none;
     }
 }
-    .badge-pill {
+.badge-pill {
     padding-right: 0.6em;
     padding-left: 0.6em;
     border-radius: 10rem;
-    }
+}
 
-    .badge-success {
-        color: #fff;
-        background-color: #28a745;
-    }
+.badge-success {
+    color: #fff;
+    background-color: #28a745;
+}
 
-    .badge-danger {
-        color: #fff;
-        background-color: #dc3545;
-    }
+.badge-danger {
+    color: #fff;
+    background-color: #dc3545;
+}
+
+.leaflet-popup-content-wrapper {
+    padding: 0;
+}
+
+.leaflet-popup-content {
+    margin: 0;
+}
+
+.popup-card {
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.popup-card-header {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.popup-card-body {
+    margin-top: 10px;
+}
+
+.popup-card-body p {
+    margin: 5px 0;
+}
+
+.popup-card-footer {
+    margin-top: 10px;
+    text-align: right;
+}
+
 </style>
 @endpush
 @section('breadcumbs')
@@ -130,7 +164,6 @@
 {{-- Leaflet Legend --}}
 <script type="text/javascript" src="{{ asset('assets/js/leaflet-control/leaflet.legend.js') }}"></script>
 
-
 <script>
     const officon = L.icon({
         iconUrl: `img/location-off.png`,
@@ -148,6 +181,22 @@
         popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
 
+    L.Control.MyControl = L.Control.extend({
+        onAdd: function(map) {
+            var el = L.DomUtil.create('div', 'leaflet-bar my-control');
+            el.innerHTML = '<b>Jakarta</b>'; // Customize this line
+            return el;
+        },
+
+        onRemove: function(map) {
+            // Nothing to do here
+        }
+    });
+
+    L.control.myControl = function(opts) {
+        return new L.Control.MyControl(opts);
+    }
+
     var markers = []
     var parentLocation = []
     var subLocation = []
@@ -156,6 +205,8 @@
     var map;
 
     $(document).ready(function() {
+        const incidents = @json($incidents);
+
         if(navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(position => {
                 localCoord = position.coords;
@@ -209,30 +260,9 @@
                     fullscreenControl: false,
                     layers: [topography, sattelite, grayscale, streets]
                 });
-                // Start Configuration Control
 
                 // Add change layer control
                 L.control.layers(basemaps).addTo(map);
-
-                // Add legend control
-                // const legend = L.control.Legend({
-                //     position: "bottomright",
-                //     collapsed: false,
-                //     title: 'Information',
-                //     symbolWidth: 26,
-                //     opacity: 0.8,
-                //     column: 1,
-                //     legends: [{
-                //         label: "STATUS AC ON",
-                //         type: "image",
-                //         url: "img/location-on.png",
-                //     }, {
-                //         label: "STATUS AC OFF",
-                //         type: "image",
-                //         url: "img/location-off.png"
-                //     }]
-                // })
-                // .addTo(map);
 
                 // Add fullscreen control
                 L.control.fullscreen({
@@ -253,41 +283,115 @@
                     position: 'topright'
                 }).addTo(map);
 
-                L.control.myControl = function(opts) {
-                    return new L.Control.MyControl(opts);
-                }
-
                 L.control.myControl({
                     position: 'topleft'
                 }).addTo(map);
-                // End Search Control
 
-                // Start Info Control
-                L.Control.Info = L.Control.extend({
-                    onAdd: function(map) {
-                        var el = L.DomUtil.create('div', 'leaflet-bar my-control info-control');
-                        el.innerHTML += `<span id="countParentLocation">0</span> Region | <span id="countSubLocation">0</span> Office`;
+                // Add markers for incidents
+                incidents.forEach(incident => {
+                    let popupContent = `
+                        <div class="popup-card">
+                            <div class="popup-card-header">${incident.incident_number}</div>
+                            <div class="popup-card-body">
+                                <img src="{{ asset('${incident.image}') }}" width="50" alt="" class="d-block mx-auto">
+                                <p>Status: ${incident.status}</p>
+                                <hr class="my-2">
+                                <p>Description:</p>
+                                <p>${incident.description}</p>
+                            </div>
+                            <div class="popup-card-footer">
+                    `;
 
-                        return el;
-                    },
-
-                    onRemove: function(map) {
-                        // Nothing to do here
+                    if (incident.status === 'requested') {
+                        popupContent += `<button class="btn btn-success accept-btn" data-id="${incident.id}" data-url="/queue/${incident.id}/accept">Accept</button>`;
+                    } else if (incident.status === 'processed') {
+                        popupContent += `<button class="btn btn-warning complete-btn" data-id="${incident.id}" data-url="/incidents/${incident.id}/complete">Complete</button>`;
                     }
+
+                    popupContent += `</div></div>`;
+
+                    L.marker([incident.latitude, incident.longitude], {
+                        icon: incident.status !== 'completed' ? onicon : officon
+                    }).addTo(map)
+                    .bindPopup(popupContent);
                 });
 
-                L.control.Info = function(opts) {
-                    return new L.Control.Info(opts);
-                }
+                // Event listeners for buttons
+                map.on('popupopen', function(e) {
+                    const acceptButtons = document.querySelectorAll('.accept-btn');
+                    acceptButtons.forEach(button => {
+                        button.addEventListener('click', function () {
+                            const incidentId = this.getAttribute('data-id');
+                            const url = this.getAttribute('data-url');
+                            const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-                L.control.Info({
-                    position: 'bottomleft'
-                }).addTo(map);
-                // End Info Control
+                            fetch(`${url}`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': token
+                                },
+                                body: JSON.stringify({})
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.message === 'Incident accepted successfully') {
+                                    Swal.fire(
+                                        'Accepted!',
+                                        'The incident has been accepted.',
+                                        'success'
+                                    ).then(() => {
+                                        location.reload();
+                                    });
+                                } else {
+                                    Swal.fire(
+                                        'Error!',
+                                        data.message,
+                                        'error'
+                                    )
+                                }
+                            })
+                            .catch(error => console.error('Error:', error));
+                        });
+                    });
 
-                // End Configure Control
+                    const completeButtons = document.querySelectorAll('.complete-btn');
+                    completeButtons.forEach(button => {
+                        button.addEventListener('click', function () {
+                            const incidentId = this.getAttribute('data-id');
+                            const url = this.getAttribute('data-url');
+                            const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-                 // get location
+                            fetch(`${url}`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': token
+                                },
+                                body: JSON.stringify({})
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.message === 'Incident completed successfully') {
+                                    Swal.fire(
+                                        'Completed!',
+                                        'The incident has been completed.',
+                                        'success'
+                                    ).then(() => {
+                                        location.reload();
+                                    });
+                                } else {
+                                    Swal.fire(
+                                        'Error!',
+                                        data.message,
+                                        'error'
+                                    )
+                                }
+                            })
+                            .catch(error => console.error('Error:', error));
+                        });
+                    });
+                });
             });
         }
     });

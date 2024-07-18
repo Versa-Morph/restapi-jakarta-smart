@@ -41,18 +41,21 @@ Route::middleware('auth:web')->group(function () {
 
         if ($user->role !== 'admin') {
             $baseQuery->where('responder_id', $user->id);
-            $data['instance'] = InstanceDetail::where('id', $user->instance_detail_id)->first();
+            $data['instance'] = InstanceDetail::where('id', $user->instance_detail_id)->get();
         }
 
         $data['all_incident'] = $baseQuery->count();
 
+        $incidentQuery = clone $baseQuery;
         $queueQuery = clone $baseQuery;
         $processedQuery = clone $baseQuery;
         $completedQuery = clone $baseQuery;
 
+        $data['incidents'] = $incidentQuery->where('status', '!=', 'completed')->get();
         $data['queue_incident'] = $queueQuery->where('status', 'requested')->count();
         $data['processed_incident'] = $processedQuery->where('status', 'processed')->count();
         $data['completed_incident'] = $completedQuery->where('status', 'completed')->count();
+
         return view('overview.index', $data);
     })->name('overview');
 

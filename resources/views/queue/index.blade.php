@@ -20,6 +20,7 @@
                             <tr>
                                 <th width="5%">No</th>
                                 <th>Datetime</th>
+                                <th>Image</th>
                                 <th>Incident Number</th>
                                 <th>Caller</th>
                                 <th>Responder</th>
@@ -34,6 +35,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $incident->created_at->format('d-m-Y H:i:s') }}</td>
+                                <td><img src="{{ asset($incident->image) }}" width="50" alt="" class="d-block mx-auto" style="border-radius: 50%;"></td>
                                 <td>{{ $incident->incident_number }}</td>
                                 <td>{{ $incident->caller->username }}</td>
                                 <td>{{ $incident->responder->username ?? 'Unassigned' }}</td>
