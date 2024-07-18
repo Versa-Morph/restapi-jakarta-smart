@@ -14,7 +14,7 @@
             <div class="card">
                 <div class="card-header p-3">
                     <div class="d-flex justify-content-start align-items-center">
-                        <h3 class="m-0 p-0">Create Agency</h3>
+                        <h3 class="m-0 p-0">Create Instance</h3>
                     </div>
                 </div>
                 <div class="card-body">

@@ -59,17 +59,18 @@
                         Please sign up for your account
                     </div>
                     <!-- Registration form start -->
-                    <form class="md-float-material form-material mt-5" method="POST" action="{{ route('register') }}">
+                    <form class="md-float-material form-material mt-5" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
+                        @include('components.alert')
                         <div class="row">
                             <div class="col-md-6 px-1">
                                 <div class="form-group formlogin mb-3">
                                     <div class="input-icon">
                                         <i class="fas fa-user"></i>
-                                        <input type="text" name="name" id="name" class="style-form-input" required maxlength="255" placeholder="Input Your Name..." title="maximum 255 characters" autofocus>
+                                        <input type="text" name="username" id="username" class="style-form-input" value="{{ old('username') }}" required maxlength="255" placeholder="Input Your Username..." title="maximum 255 characters" autofocus>
                                     </div>
-                                    @error('name')
-                                        <div class="text-danger">{{ $message }}</div>
+                                    @error('username')
+                                        <small class="text-danger text-left">{{ $message }}</sma>
                                     @enderror
                                 </div>
                             </div>
@@ -77,10 +78,10 @@
                                 <div class="form-group formlogin mb-3">
                                     <div class="input-icon">
                                         <i class="fas fa-envelope"></i>
-                                        <input type="email" name="email" id="email" class="style-form-input" required maxlength="255" placeholder="Input Your Email..." title="maximum 255 characters">
+                                        <input type="email" name="email" id="email" class="style-form-input" required value="{{ old('email') }}" maxlength="255" placeholder="Input Your Email..." title="maximum 255 characters">
                                     </div>
                                     @error('email')
-                                        <div class="text-danger">{{ $message }}</div>
+                                        <small class="text-danger text-left">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
@@ -94,7 +95,7 @@
                                         <input type="password" name="password" id="password" class="style-form-input" required autocomplete="on" title="minimum 8 characters" minlength="8" placeholder="Input Your Password...">
                                     </div>
                                     @error('password')
-                                        <div class="text-danger">{{ $message }}</div>
+                                        <small class="text-danger text-left">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
@@ -103,6 +104,98 @@
                                     <div class="input-icon">
                                         <i class="fas fa-lock"></i>
                                         <input type="password" name="password_confirmation" id="password-confirm" class="style-form-input" required autocomplete="on" title="minimum 8 characters" minlength="8" placeholder="Confirm Your Password...">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4 class="mb-0 text-uppercase">Data Instance</h4>
+                        <hr class="my-2">
+
+                        <div class="row">
+                            <div class="col-md-6 px-1">
+                                <div class="form-group formlogin mb-3">
+                                    <div class="input-icon">
+                                        <i class="fas fa-landmark"></i>
+                                        <select name="instance_id" id="instance_id" class="style-form-input">
+                                            @foreach ($instances as $instance)
+                                            <option value="{{ $instance->id }}" {{ old('instance_id') == $instance->id ? 'selected' : '' }}>{{ $instance->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    @error('instance_id')
+                                        <small class="text-danger text-left">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 px-1">
+                                <div class="form-group mb-3">
+                                    <div class="input-icon">
+                                        <i class="fas fa-user-secret"></i>
+                                        <input type="text" name="name" id="name" class="style-form-input" required value="{{ old('name') }}" maxlength="255" placeholder="Input Your Name Instace..." title="maximum 255 characters">
+                                    </div>
+                                    @error('name')
+                                        <small class="text-danger text-left">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 px-1">
+                                <div class="form-group formlogin mb-3">
+                                    <div class="input-icon">
+                                        <i class="fas fa-image"></i>
+                                        <input type="file" name="logo" class="style-form-input" accept="image/png, image/jpeg, image/jpg, image/webp">
+                                    </div>
+                                    @error('logo')
+                                        <small class="text-danger text-left">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6 px-1">
+                                <div class="form-group formlogin mb-3">
+                                    <div class="input-icon">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <input type="text" name="pluscode" class="style-form-input" required value="{{ old('pluscode') }}" maxlength="255" placeholder="Input Your Pluscode...">
+                                    </div>
+                                    @error('pluscode')
+                                        <small class="text-danger text-left">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6 px-1">
+                                <div class="form-group formlogin mb-3">
+                                    <div class="input-icon">
+                                        <i class="fas fa-map"></i>
+                                        <input type="text" name="longitude" class="style-form-input" required value="{{ old('longitude') }}" maxlength="255" placeholder="Input Your Longitude...">
+                                    </div>
+                                    @error('longitude')
+                                        <small class="text-danger text-left">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 px-1">
+                                <div class="form-group formlogin mb-3">
+                                    <div class="input-icon">
+                                        <i class="fas fa-map"></i>
+                                        <input type="text" name="latitude" class="style-form-input" required value="{{ old('latitude') }}" maxlength="255" placeholder="Input Your Latitude...">
+                                    </div>
+                                    @error('latitude')
+                                        <small class="text-danger text-left">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 px-1">
+                                <div class="form-group formlogin mb-3">
+                                    <div class="input-icon">
+                                        <textarea name="address" id="address" class="style-form-input pl-3" cols="30" rows="3" placeholder="Input Your Address...">{{ old('address') }}</textarea>
                                     </div>
                                 </div>
                             </div>

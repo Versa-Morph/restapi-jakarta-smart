@@ -212,7 +212,7 @@ class IncidentController extends Controller
             $incident = Incident::create([
                 'incident_number'    => $incidentNumber,
                 'caller_id'          => $user->id,
-                'responder_id'       => $instanceResponder->id,
+                'responder_id'       => $instanceResponder->users[0]->id,
                 'description'        => $request->description,
                 'image'              => $imagePath,
                 'request_datetime'   => now(),

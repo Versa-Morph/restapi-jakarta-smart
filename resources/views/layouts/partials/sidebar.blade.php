@@ -43,7 +43,6 @@
     <!-- Sidebar Profile End -->
 
     <!-- Sidebar Navigation Start -->
-    @if(Auth::user()->role == 'admin')
     <div class="sidebar--nav">
         <ul>
             <li>
@@ -57,6 +56,13 @@
                             <span>Overview</span>
                         </a>
                     </li>
+                    <li class="{{ request()->routeIs('overview') ? 'active' : '' }}">
+                        <a href="{{ route('overview') }}">
+                            <i class="fas fa-th-large"></i>
+                            <span>Maps</span>
+                        </a>
+                    </li>
+                    @if(Auth::user()->role == 'admin')
                     <li class="{{ request()->routeIs('data.index') ? 'active' : '' }}">
                         <a href="{{ route('data.index') }}">
                             <i class="fas fa-shopping-basket"></i>
@@ -87,11 +93,11 @@
                             <span>Queue</span>
                         </a>
                     </li>
+                    @endif
                 </ul>
             </li>
         </ul>
     </div>
-    @endif
     <!-- Sidebar Navigation End -->
 </aside>
 <!-- Sidebar End -->

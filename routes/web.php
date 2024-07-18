@@ -9,6 +9,7 @@ use App\Http\Controllers\InstanceDetailController;
 use App\Http\Controllers\StatisticController;
 use App\Models\Incident;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,12 +31,23 @@ Route::middleware('auth:web')->group(function () {
     // Overview
     Route::get('/overview', function () {
         $today = Carbon::today();
+        $user = Auth::user();
 
         $data['page_title'] = 'overview';
-        $data['all_incident'] = Incident::whereDate('request_datetime', $today)->count();
-        $data['queue_incident'] = Incident::where('status', 'requested')->whereDate('request_datetime', $today)->count();
-        $data['processed_incident'] = Incident::where('status', 'processed')->whereDate('request_datetime', $today)->count();
-        $data['completed_incident'] = Incident::where('status', 'completed')->whereDate('request_datetime', $today)->count();
+
+        // Base query
+        $query = Incident::whereDate('request_datetime', $today);
+
+        // Adjust query for non-admin users
+        if ($user->role !== 'admin') {
+            $query->where('responder_id', $user->id);
+        }
+
+        // Get counts
+        $data['all_incident'] = $query->count();
+        $data['queue_incident'] = $query->where('status', 'requested')->count();
+        $data['processed_incident'] = $query->where('status', 'processed')->count();
+        $data['completed_incident'] = $query->where('status', 'completed')->count();
 
         return view('overview.index', $data);
     })->name('overview');
