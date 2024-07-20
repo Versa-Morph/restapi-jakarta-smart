@@ -1,61 +1,80 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# REST API Jakarta Smart
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+REST API Jakarta Smart adalah layanan API yang menyediakan data dan informasi terkait kota Jakarta. API ini dirancang untuk membantu pengembang dalam mengakses berbagai data yang berkaitan dengan Jakarta, termasuk informasi lalu lintas, cuaca, transportasi publik, dan lain-lain.
 
-## About Laravel
+## Fitur Utama
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Informasi Lalu Lintas:** Data real-time tentang kondisi lalu lintas di Jakarta.
+- **Cuaca:** Informasi cuaca harian dan perkiraan cuaca mingguan.
+- **Transportasi Publik:** Data jadwal dan rute transportasi publik seperti bus, kereta, dan MRT.
+- **Berita Lokal:** Berita terkini dari sumber-sumber terpercaya tentang Jakarta.
+- **Layanan Darurat:** Informasi kontak layanan darurat di Jakarta.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Instalasi
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Untuk menginstal proyek ini secara lokal, ikuti langkah-langkah berikut:
 
-## Learning Laravel
+1. Clone repositori ini:
+    ```sh
+    git clone https://github.com/Versa-Morph/restapi-jakarta-smart.git
+    ```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+2. Masuk ke direktori proyek:
+    ```sh
+    cd restapi-jakarta-smart
+    ```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+3. Instal dependensi yang diperlukan:
+    ```sh
+    npm install
+    ```
 
-## Laravel Sponsors
+4. Buat file `.env` dari template `.env.example` dan sesuaikan konfigurasi:
+    ```sh
+    cp .env.example .env
+    ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+5. Jalankan server:
+    ```sh
+    npm start
+    ```
 
-### Premium Partners
+## Penggunaan
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+Setelah server berjalan, Anda dapat mengakses API melalui `http://localhost:3000`. Berikut adalah beberapa endpoint yang tersedia:
 
-## Contributing
+- **GET /traffic:** Mendapatkan informasi lalu lintas.
+- **GET /weather:** Mendapatkan informasi cuaca terkini.
+- **GET /public-transport:** Mendapatkan data transportasi publik.
+- **GET /news:** Mendapatkan berita terbaru.
+- **GET /emergency-contacts:** Mendapatkan informasi kontak layanan darurat.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Contoh Penggunaan
 
-## Code of Conduct
+**Mengambil Informasi Lalu Lintas**
+```sh
+curl -X GET http://localhost:3000/traffic
+```
+**Mengambil Informasi Lalu Lintas**
+```sh
+curl -X GET http://localhost:3000/weather
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Kontribusi
 
-## Security Vulnerabilities
+Kami menerima kontribusi dari siapa saja yang ingin berkontribusi pada pengembangan proyek ini. Untuk berkontribusi, silakan ikuti langkah-langkah berikut:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. Fork repositori ini.
+2. Buat branch fitur baru (`git checkout -b fitur-anda`).
+3. Commit perubahan Anda (`git commit -am 'Tambah fitur ABC'`).
+4. Push ke branch tersebut (`git push origin fitur-anda`).
+5. Buat Pull Request baru.
 
-## License
+## Lisensi
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Proyek ini dilisensikan di bawah [MIT License](LICENSE).
+
+## Kontak
+
+Untuk informasi lebih lanjut atau pertanyaan, silakan hubungi kami di [versamorph.dev@gmail.com](mailto:versamorph.dev@gmail.com).
+
